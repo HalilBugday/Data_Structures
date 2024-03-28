@@ -37,9 +37,7 @@ public class Word {
 			if(obj == null || getClass() != obj.getClass()) {
 				return false;
 			}
-			Word other = (Word) obj; //obj word classa dönüştür
+			Word other = (Word) obj;
 			return content.equals(other.content);
-		}
-		
-		
+		}	
 }

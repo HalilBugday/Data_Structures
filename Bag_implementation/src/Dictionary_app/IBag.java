@@ -15,8 +15,5 @@ public interface IBag <T> {
 	public void displayItems();
 	public int getCurrentSize();
 	public T[] toArray();
-	
-	//public void checkInitialization();
-	//public void doubleCapacity();
 
 }

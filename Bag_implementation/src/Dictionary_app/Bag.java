@@ -4,31 +4,32 @@ import java.util.Arrays;
 
 public class Bag <T> implements IBag <T> {
 
-
 	private T[] bagArray;
 	private int numberOfEntries;
-	private static final int DEFAULT_CAPACITY = 100;
+	private static final int DEFAULT_CAPACITY = 10;
+	private static final int MAX_CAPACITY = 10000;
 	private boolean initialized = false;
-
+	
 public Bag() {
+	
 	this(DEFAULT_CAPACITY);
 }
-
 public Bag(int desiredCapacity) {
-	if(desiredCapacity <= DEFAULT_CAPACITY) {
+	if(desiredCapacity <= MAX_CAPACITY && desiredCapacity >=1 ) {
 		@SuppressWarnings("unchecked")
 		T[] tempBag = (T[]) new Object[desiredCapacity];
 		bagArray = tempBag;
 		numberOfEntries=0;
 		initialized = true;
 	}else {
-		throw new IllegalStateException("Constructor error: Desired capacity is too large.");
+		throw new IllegalStateException("Attempt to create a bag whose capacity exceeds allowed maximum! "
+				+ "Or the initialized bag size is not positive integer!");
     }
 }
 
 public void checkInitialization() {
 	if(!initialized) {
-		throw new IllegalStateException("Bag has not been initialized");
+		throw new SecurityException("ArrayBag object is not initialized properly!");
 	}
 }
 
@@ -83,7 +84,7 @@ public T removeByIndex(int index) {
      }
     return result;
 }
-    
+
 @Override
 public boolean remove(T anEntry) {
 	checkInitialization();
@@ -168,9 +169,5 @@ public T[] toArray() {
          result[index]=bagArray[index];
      }
      return result;
-}
-
-public int getBagSize() { //test
-	return bagArray.length;
 }
 }

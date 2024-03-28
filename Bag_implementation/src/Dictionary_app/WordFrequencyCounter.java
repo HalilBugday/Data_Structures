@@ -2,21 +2,20 @@ package Dictionary_app;
 
 public class WordFrequencyCounter {
     public static void main(String[] args) {
-        Text text = new Text(100);
-        Dictionary<Word> dictionary = new Dictionary<>(100);
-        RareWordsDictionary<Word> rareWordsDictionary = new RareWordsDictionary<>(100);
-        FrequentWordsDictionary<Word> frequentWordsDictionary = new FrequentWordsDictionary<>(100);
-        MostFrequentWordsDictionary<Word> mostFrequentWordsDictionary = new MostFrequentWordsDictionary<>(100);
-
-        String filePath = "text";
-        String fileContent = FileIO.readTextFromFile(filePath);
-        text.setContent(fileContent);
+        Text<Word> text = new Text<Word>();
+        Dictionary<Word> dictionary = new Dictionary<>(10);
+        RareWordsDictionary<Word> rareWordsDictionary = new RareWordsDictionary<>(10);
+        FrequentWordsDictionary<Word> frequentWordsDictionary = new FrequentWordsDictionary<>(10);
+        MostFrequentWordsDictionary<Word> mostFrequentWordsDictionary = new MostFrequentWordsDictionary<>(10);
+        FileIO.readFile(text, dictionary);
         text.separate(dictionary, rareWordsDictionary, frequentWordsDictionary, mostFrequentWordsDictionary);
 
         System.out.println("Text:");
-        System.out.println("Number of words: " + text.getCurrentSize());
-        System.out.print("Content: " + text.getContent());
-
+        System.out.println("Text number of words: " + text.getCurrentSize());
+        System.out.print("Contnet: ");
+        text.displayItems();
+        
+        System.out.println();
         System.out.println("\nRare Words Dictionary:");
         System.out.println("Number of words: " + rareWordsDictionary.getCurrentSize());
         System.out.print("Content: ");
@@ -34,5 +33,7 @@ public class WordFrequencyCounter {
         System.out.print("Content: " );
         mostFrequentWordsDictionary.displayItems();
         
+       
+ 
     }
 }
